@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.ExercisePlanner.domain.Exercise;
 import com.example.ExercisePlanner.domain.ExerciseRepository;
+import com.example.ExercisePlanner.domain.Workout;
 import com.example.ExercisePlanner.domain.WorkoutRepository;
 
 @Controller
@@ -38,12 +39,26 @@ public class ExerciseController {
 		return "redirect:../exerciselist";
 	}
 
+	// delete workout
+	@RequestMapping(value = "/deleteworkout/{id}", method = RequestMethod.GET)
+	public String deleteWorkout(@PathVariable("id") Long workoutId, Model model) {
+		workRepository.deleteById(workoutId);
+		return "redirect:../workoutlist";
+	}
+
 	// add a new exercise
 	@RequestMapping(value = "/add")
 	public String addExercise(Model model) {
 		model.addAttribute("exercise", new Exercise());
 		model.addAttribute("workouts", workRepository.findAll());
 		return "addexercise";
+	}
+
+	// add a new workout
+	@RequestMapping(value = "/addworkout")
+	public String addWorkout(Model model) {
+		model.addAttribute("workout", new Workout());
+		return "addworkout";
 	}
 
 	// Edit an exercise
@@ -53,11 +68,25 @@ public class ExerciseController {
 		model.addAttribute("workouts", workRepository.findAll());
 		return "editexercise";
 	}
+	
+	// Edit workout
+		@RequestMapping(value = "/editworkout/{id}")
+		public String addWorkout(@PathVariable("id") Long workoutId, Model model) {
+			model.addAttribute("workout", workRepository.findById(workoutId));
+			return "editworkout";
+		}
 
 	// save a new exercise
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(Exercise exercise) {
 		exRepository.save(exercise);
 		return "redirect:exerciselist";
+	}
+
+	// save a new workout
+	@RequestMapping(value = "/saveworkout", method = RequestMethod.POST)
+	public String saveWorkout(Workout workout) {
+		workRepository.save(workout);
+		return "redirect:workoutlist";
 	}
 }

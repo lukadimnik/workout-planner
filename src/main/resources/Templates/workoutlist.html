@@ -2,16 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-<title>Exercise List</title>
+<title>Workout List</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
 	th:href="@{/css/bootstrap.min.css}" />
-
+<script src="https://kit.fontawesome.com/472b290801.js"
+	crossorigin="anonymous"></script>
 </head>
-<body>
 
+<body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="#">Navbar</a>
+		<a class="navbar-brand" href="#"><i class="fas fa-running"></i></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -24,7 +25,7 @@
 				<li class="nav-item active"><a class="nav-link" href="#">Home
 						<span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+				<li class="nav-item"><a class="nav-link" href="/exerciselist">Exercise List</a></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -38,38 +39,35 @@
 				<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a>
 				</li>
 			</ul>
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-			</form>
 		</div>
 	</nav>
+	<div class="container">
+		<div>
+			<h1>Workout Planner</h1>
+		</div>
+		<div class="col-md-4" style="padding: 20px 0">
+			<a href="/addworkout" class="btn btn-primary">New workout <i class="fas fa-plus"></i></a>
+		</div>
+		<div>
+			<table class="table table-striped">
+				<tbody>
+					<tr>
+						<th>Your Workouts</th>
+						<th></th>
+						<th></th>
 
-	<div>
-		<h1>Workout Planner</h1>
-	</div>
-	<div class="col-md-4" style="padding: 20px 0">
-		<a href="/add" class="btn btn-primary">Create new workout</a>
-	</div>
-	<div>
-		<table class="table table-striped">
-			<tbody>
-				<tr>
-					<th>Your Workouts</th>
-				</tr>
-				<tr th:each="workout : ${workouts}">
-					<td th:text="${workout.name}"></td>
-					<td th:text="${workout.exercises.get(0)}"></td>
-					
-					<!-- <td><a th:href="@{edit/{id}(id=${book.id})}"
-						class="btn btn-info">edit</a></td>
-					<td><a th:href="@{delete/{id}(id=${book.id})}"
-						class="btn btn-danger">delete</a></td> -->
-				</tr>
-			</tbody>
-		</table>
+					</tr>
+					<tr th:each="workout : ${workouts}">
+						<td th:text="${workout.name}"></td>
 
+						<td><a th:href="@{editworkout/{id}(id=${workout.id})}"
+							class="btn btn-info"><i class="far fa-edit"></i></a></td>
+						<td><a th:href="@{deleteworkout/{id}(id=${workout.id})}"
+							class="btn btn-danger"><i class="far fa-trash-alt"></i></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </body>
 </html>
