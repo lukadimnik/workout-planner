@@ -25,7 +25,7 @@ public class ExerciseController {
 	// login page
 	@RequestMapping("/login")
 	public String login() {
-		return "/login";
+		return "login";
 	}
 	
 	// main page with list of workouts
@@ -36,11 +36,11 @@ public class ExerciseController {
 		return "workoutlist";
 	}
 
-	@RequestMapping(value = { "/exerciselist" })
-	public String index2(Model model) {
-		model.addAttribute("exercises", exRepository.findAll());
-		return "exerciselist";
-	}
+//	@RequestMapping(value = { "/exerciselist" })
+//	public String index2(Model model) {
+//		model.addAttribute("exercises", exRepository.findAll());
+//		return "exerciselist";
+//	}
 
 	// RESTful service to get all exercises
 	@RequestMapping(value = "/exercises", method = RequestMethod.GET)
