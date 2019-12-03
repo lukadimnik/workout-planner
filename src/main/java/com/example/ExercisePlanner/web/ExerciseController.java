@@ -6,6 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import java.util.List;
+import java.util.Optional;
 
 import com.example.ExercisePlanner.domain.Exercise;
 import com.example.ExercisePlanner.domain.ExerciseRepository;
@@ -19,24 +22,42 @@ public class ExerciseController {
 	@Autowired
 	private WorkoutRepository workRepository;
 
-	@RequestMapping(value = { "/", "/exerciselist" })
+	@RequestMapping(value = {  "/", "/workoutlist" })
+	public String index2(Model model) {
+		model.addAttribute("workouts", workRepository.findAll());
+		model.addAttribute("exercises", exRepository.findAll());
+		return "workoutlist";
+	}
+	
+	@RequestMapping(value = {"/exerciselist" })
 	public String index(Model model) {
 		model.addAttribute("exercises", exRepository.findAll());
 		return "exerciselist";
 	}
 
-	@RequestMapping(value = { "/workoutlist" })
-	public String index2(Model model) {
-		model.addAttribute("workouts", workRepository.findAll());
-		model.addAttribute("exercises", exRepository.findAll());
-		return "workoutlist";
+	// RESTful service to get all exercises
+	@RequestMapping(value = "/exercises", method = RequestMethod.GET)
+	public @ResponseBody List<Exercise> exerciseListRest() {
+		return (List<Exercise>) exRepository.findAll();
+	}
+
+	// RESTful service to get all workouts
+	@RequestMapping(value = "/workouts", method = RequestMethod.GET)
+	public @ResponseBody List<Workout> workoutListRest() {
+		return (List<Workout>) workRepository.findAll();
+	}
+
+	// RESTful service to get exercise by id
+	@RequestMapping(value = "/exercise/{id}", method = RequestMethod.GET)
+	public @ResponseBody Optional<Exercise> findExerciseRest(@PathVariable("id") Long exerciseId) {
+		return exRepository.findById(exerciseId);
 	}
 
 	// delete an exercise
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteExercise(@PathVariable("id") Long exerciseId, Model model) {
 		exRepository.deleteById(exerciseId);
-		return "redirect:../exerciselist";
+		return "redirect:../workoutlist";
 	}
 
 	// delete workout
@@ -68,19 +89,19 @@ public class ExerciseController {
 		model.addAttribute("workouts", workRepository.findAll());
 		return "editexercise";
 	}
-	
+
 	// Edit workout
-		@RequestMapping(value = "/editworkout/{id}")
-		public String addWorkout(@PathVariable("id") Long workoutId, Model model) {
-			model.addAttribute("workout", workRepository.findById(workoutId));
-			return "editworkout";
-		}
+	@RequestMapping(value = "/editworkout/{id}")
+	public String addWorkout(@PathVariable("id") Long workoutId, Model model) {
+		model.addAttribute("workout", workRepository.findById(workoutId));
+		return "editworkout";
+	}
 
 	// save a new exercise
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(Exercise exercise) {
 		exRepository.save(exercise);
-		return "redirect:exerciselist";
+		return "redirect:workoutlist";
 	}
 
 	// save a new workout
