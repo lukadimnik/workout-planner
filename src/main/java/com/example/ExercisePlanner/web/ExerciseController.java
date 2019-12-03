@@ -29,15 +29,15 @@ public class ExerciseController {
 	}
 	
 	// main page with list of workouts
-	@RequestMapping(value = { "/workoutlist" })
-	public String index2(Model model) {
+	@RequestMapping("/workoutlist")
+	public String index(Model model) {
 		model.addAttribute("workouts", workRepository.findAll());
 		model.addAttribute("exercises", exRepository.findAll());
 		return "workoutlist";
 	}
 
 	@RequestMapping(value = { "/exerciselist" })
-	public String index(Model model) {
+	public String index2(Model model) {
 		model.addAttribute("exercises", exRepository.findAll());
 		return "exerciselist";
 	}
