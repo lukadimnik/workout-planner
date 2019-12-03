@@ -12,6 +12,8 @@
 	<groupId>com.example</groupId>
 	<artifactId>ExercisePlanner</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
 	<name>ExercisePlanner</name>
 	<description>Application for setting up an exercise plan.</description>
 
