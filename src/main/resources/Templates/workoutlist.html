@@ -64,13 +64,13 @@
 			</thead>
 			<tbody>
 				<tr>
-					<th></th>
-					<th></th>
-					<th></th>
-					<th></th>
-					<th></th>
-					<th></th>
-					<th></th>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
 				</tr>
 			</tbody>
 		</table>
@@ -108,19 +108,28 @@
 						href="/add" class="btn btn-primary">New exercise <i
 						class="fas fa-plus"></i></a>
 
-
-
 					<h5 th:text="${workout.name}" class="card-title"></h5>
-					<div th:each="exercise : ${exercises}" class="card shadow-sm m-2">
-						<div class="card-body">
-							<h5 th:text="${exercise.name}"></h5>
-							<p th:text="${exercise.sets}"></p>
-							<p th:text="${exercise.reps}"></p>
-							<p th:text="${exercise.rest}"></p>
-							<a th:href="@{edit/{id}(id=${exercise.id})}" class="btn btn-info"><i
-								class="far fa-edit"></i></a> <a
-								th:href="@{delete/{id}(id=${exercise.id})}"
-								class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+
+					<div th:each="exercise : ${exercises}">
+						<div th:if="${workout.name == exercise.workout.name}" class="card">
+							<div class="card-body shadow-sm m-2">
+
+								<h5 th:text="${exercise.name}"></h5>
+
+								<div>Sets:</div>
+								<p th:text="${exercise.sets}"></p>
+
+								<div>Reps:</div>
+								<p th:text="${exercise.reps}"></p>
+
+								<div>Rest:</div>
+								<p th:text="${exercise.rest}"></p>
+								<div></div>
+								<a th:href="@{edit/{id}(id=${exercise.id})}"
+									class="btn btn-info"><i class="far fa-edit"></i></a> <a
+									th:href="@{delete/{id}(id=${exercise.id})}"
+									class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+							</div>
 						</div>
 					</div>
 				</div>
