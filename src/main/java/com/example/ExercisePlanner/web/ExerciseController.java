@@ -22,14 +22,20 @@ public class ExerciseController {
 	@Autowired
 	private WorkoutRepository workRepository;
 
-	@RequestMapping(value = {  "/", "/workoutlist" })
+	// login page
+	@RequestMapping("/login")
+	public String login() {
+		return "login";
+	}
+
+	@RequestMapping(value = { "/", "/workoutlist" })
 	public String index2(Model model) {
 		model.addAttribute("workouts", workRepository.findAll());
 		model.addAttribute("exercises", exRepository.findAll());
 		return "workoutlist";
 	}
-	
-	@RequestMapping(value = {"/exerciselist" })
+
+	@RequestMapping(value = { "/exerciselist" })
 	public String index(Model model) {
 		model.addAttribute("exercises", exRepository.findAll());
 		return "exerciselist";
