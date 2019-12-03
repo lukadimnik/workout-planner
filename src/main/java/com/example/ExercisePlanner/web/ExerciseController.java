@@ -25,7 +25,7 @@ public class ExerciseController {
 	// login page
 	@RequestMapping("/login")
 	public String login() {
-		return "login";
+		return "/login";
 	}
 	
 	// main page with list of workouts
