@@ -23,11 +23,11 @@ public class ExerciseController {
 	private WorkoutRepository workRepository;
 
 	// login page
-	@RequestMapping("/login")
+	@RequestMapping(value = { "/", "/login" })
 	public String login() {
 		return "login";
 	}
-	
+
 	// main page with list of workouts
 	@RequestMapping("/workoutlist")
 	public String index(Model model) {
