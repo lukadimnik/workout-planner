@@ -10,14 +10,14 @@
 
 </head>
 <body>
-	<div class="container">
-		<div th:if="${param.error}">Invalid username and password.</div>
+	<div class="container mx-auto text-center">
+		<h1>Workout Planner</h1>
 		<div style="clear: both; display: block; height: 10px;"></div>
 
 		<div th:if="${param.logout}">You have been logged out.</div>
 		<div style="clear: both; display: block; height: 10px;"></div>
 
-		<div class="col-md-4">
+		<div class="card bg-light">
 			<form th:action="@{/login}" method="post">
 				<div>
 					<label> User Name : <input type="text" name="username"
@@ -30,10 +30,13 @@
 				</div>
 				<div style="clear: both; display: block; height: 10px;"></div>
 				<div>
-					<input type="submit" class="btn btn-primary" name="Sign In" />
+					<input type="submit" class="btn btn-primary" value="Sign In" />
 				</div>
 			</form>
+			<div style="clear: both; display: block; height: 10px;"></div>
 		</div>
+		<a class="btn btn-info m-5" th:href="@{/signup}">Sign up</a>
+		<div th:if="${param.error}">Invalid username and password.</div>
 	</div>
 </body>
 </html>
