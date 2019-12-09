@@ -26,9 +26,9 @@ public class ExercisePlannerApplication {
 			workRepository.save(new Workout("Fat Burn"));
 			workRepository.save(new Workout("Strength Training"));
 
-			exRepository.save(new Exercise("Push Ups", 22, 19, 30, workRepository.findByName("Fat Burn")));
-			exRepository.save(new Exercise("Squats", 22, 19, 30, workRepository.findByName("Strength Training")));
-			exRepository.save(new Exercise("Bench Press", 22, 19, 30, workRepository.findByName("Strength Training")));
+			exRepository.save(new Exercise("Push Ups", 2, 19, 30, workRepository.findByName("Fat Burn")));
+			exRepository.save(new Exercise("Squats", 3, 19, 30, workRepository.findByName("Strength Training")));
+			exRepository.save(new Exercise("Bench Press", 4, 19, 30, workRepository.findByName("Strength Training")));
 
 			// Create users: admin/admin user/user
 			User user1 = new User("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");
